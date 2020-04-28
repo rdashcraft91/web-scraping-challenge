@@ -18,7 +18,7 @@ def scrape():
     url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
     browser.visit(url)
 
-    time.sleep(20)
+    time.sleep(5)
 
     # Scrape relevant data
 
@@ -60,7 +60,7 @@ def scrape():
     url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit(url)
 
-    time.sleep(20)
+    time.sleep(5)
 
     # Scrape relevant data
 
@@ -83,12 +83,13 @@ def scrape():
     mars_df = mars_facts[0]
     mars_df
 
-    mars_table_html = mars_df.to_html(header=False)
+    mars_table_html = mars_df.to_html(header=False, index=False)
+    mars_df.to_html('mars_table.html', header=False, index=False)
 
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url)
 
-    time.sleep(10)
+    time.sleep(5)
 
     hemispheres = ['Cerberus Hemisphere', 'Schiaparelli Hemisphere', 'Syrtis Major Hemisphere', 'Valles Marineris Hemisphere']
     hemisphere_images_urls = []
@@ -103,7 +104,7 @@ def scrape():
         browser.click_link_by_partial_text(f'{item}')
         current_url = browser.url
         response = requests.get(current_url)
-        time.sleep(20)
+        time.sleep(5)
         soup = BeautifulSoup(response.text, 'html.parser')
         wide_image = soup.find('div', class_="wide-image-wrapper")
         downloads = wide_image.find('div', class_="downloads")

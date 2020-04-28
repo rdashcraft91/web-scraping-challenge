@@ -6,24 +6,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1>Get All The Mars Info You Could Need!</h1>
-      <p>Blah. Blah. Hope this works.</p>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Info!</a></p>
+      <h1>Mission to Mars!</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
-    <img src="{{ mars_info.featured_image_url }}" alt="Sloth">
-    <h2>Current weater on Mars is:</h2>
-    <h3>{{ mars_info.news_title }}</h3>
-    <h3>{{ mars_info.news_p }}</h3>
-    <h1>{{ mars_info.hemisphere_data[0].title }}</h1>
-    <img src="{{ mars_info.hemisphere_data[0].img_url }}" alt="Sloth">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Latest Mars News:</h1>
+        <h2 style="text-decoration: underline;">{{ mars_info.news_title }}</h2>
+        <h3>{{ mars_info.news_p }}</h3>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center" style="margin-top: 20px;">
+      <div class="col-md-7">
+        <h2>Featured Mars Image<hr/></h2>
+        <img src="{{ mars_info.featured_image_url }}" alt="Sloth" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+        <h2>Getting to Know Mars<hr/></h2>
+        <div class="card-body" style="border: solid; margin-bottom: 20px;">
+          <h4 class="card-title">Current Weather on Mars:</h4>
+          <p class="card-text">
+            {{ mars_info.mars_weather}}
+          </p>
+        </div>
+        <div class="card-body" style="border: solid; margin-top: 20px;">
+          <h4 class="card-title">Mars Fun Facts!</h4>
+          <!-- {{ mars_info.mars_table_html }} -->
+          <table border="1" class="dataframe">
+            <tbody>
+              <tr>
+                <td>Equatorial Diameter:</td>
+                <td>6,792 km</td>
+              </tr>
+              <tr>
+                <td>Polar Diameter:</td>
+                <td>6,752 km</td>
+              </tr>
+              <tr>
+                <td>Mass:</td>
+                <td>6.39 × 10^23 kg (0.11 Earths)</td>
+              </tr>
+              <tr>
+                <td>Moons:</td>
+                <td>2 (Phobos &amp; Deimos)</td>
+              </tr>
+              <tr>
+                <td>Orbit Distance:</td>
+                <td>227,943,824 km (1.38 AU)</td>
+              </tr>
+              <tr>
+                <td>Orbit Period:</td>
+                <td>687 days (1.9 years)</td>
+              </tr>
+              <tr>
+                <td>Surface Temperature:</td>
+                <td>-87 to -5 °C</td>
+              </tr>
+              <tr>
+                <td>First Record:</td>
+                <td>2nd millennium BC</td>
+              </tr>
+              <tr>
+                <td>Recorded By:</td>
+                <td>Egyptian astronomers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <div class="row dont-pad-me comparison-charts" style="margin-top: 40px; margin-bottom: 20px;">
+    <div class="container">
+        <div> <h1 class="text-center">Mars Hemispheres<hr/></h1></div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+            <h3 style="text-align: center; padding-top: 10px;">{{ mars_info.hemisphere_data[0].title }}</h3>
+            <img mg src="{{ mars_info.hemisphere_data[0].img_url }}" alt="Latitude vs. Tempurature" class="img-responsive viz-links img-fluid comparison-images">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+          <h3 style="text-align: center; padding-top: 10px;">{{ mars_info.hemisphere_data[1].title }}</h3>
+          <img mg src="{{ mars_info.hemisphere_data[1].img_url }}" alt="Latitude vs. Tempurature" class="img-responsive viz-links img-fluid comparison-images">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+          <h3 style="text-align: center; padding-top: 10px;">{{ mars_info.hemisphere_data[2].title }}</h3>
+          <img mg src="{{ mars_info.hemisphere_data[2].img_url }}" alt="Latitude vs. Tempurature" class="img-responsive viz-links img-fluid comparison-images">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+          <h3 style="text-align: center; padding-top: 10px;">{{ mars_info.hemisphere_data[3].title }}</h3>
+          <img mg src="{{ mars_info.hemisphere_data[3].img_url }}" alt="Latitude vs. Tempurature" class="img-responsive viz-links img-fluid comparison-images">
+        </div>
+    </div>
   </div>
+  
+    </div>
+    
+    <!-- <h1>{{ mars_info.hemisphere_data[0].title }}</h1>
+    <img src="{{ mars_info.hemisphere_data[0].img_url }}" alt="Sloth"> -->
+  </div>
+
 </body>
 
 </html>
