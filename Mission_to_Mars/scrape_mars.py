@@ -60,7 +60,7 @@ def scrape():
     url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit(url)
 
-    time.sleep(5)
+    time.sleep(10)
 
     # Scrape relevant data
 
